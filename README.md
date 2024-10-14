@@ -3,6 +3,9 @@
 
 This project demonstrates how to embed a form inside an iframe and automatically adjust the iframe's height based on its content and interactions. This solution ensures that the iframe is responsive and adapts to content changes (such as user input or AJAX updates) and window resizing, preventing scrollbars and maintaining a clean user experience. (i.e. This is a simple way to make your iframes both mobile responsive and content responsive. This code makes a form look like it is directly on a page and not included in an iFrame. )
 
+** Important: ** This solution requires adding code to both the parent page (the page where the iframe is embedded) and the iframe page (the page being displayed inside the iframe). So, you will need to have access to both pages. Sorry, there is no magic bullet to do only from the parent page.
+
+
 ## Demo
 Let's get right to it:
 [See the Iframe Dynamic Resizing Demo](https://dervishmoose.github.io/Iframe-Dynamic-Resizing-Demo)
