@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iframe Dynamic Resizing Demo</title>
+    <style>
+        #form-container {
+          
+            margin: 0 auto;
+            padding: 20px;
+            background: #f7f7f7;
+            border: 1px solid #ddd;
+        }
+        iframe {
+            width: 100%;
+            border: none;
+            transition: height 0.3s ease; /* Smooth transition for height changes */
+        }
+    </style>
+</head>
+<body>
+   <!-- This form-container is dynamically resized based on the size of the form. -->
+    <div id="form-container">
+       <div>This text is above the iframe.</div>
+        <iframe id="dynamic-iframe" src="form.html"></iframe>
+       This text is below the iframe.
+    </div>
+
+    <script>
+        // Function to adjust the height of the iframe dynamically based on messages from the iframe content
+        window.addEventListener("message", function (e) {
+            // Check if the message contains the 'height' property.
+            if (e.data.height) {
+                var iframe = document.getElementById("dynamic-iframe");
+                iframe.style.height = e.data.height + "px";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Form with Dynamic Resizing</title>
+    <!-- Include Bootstrap CSS for styling, as ugly demos suck. -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-section">
+        <h2>Payment Information</h2>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <p>
+                This demo showcases a form embedded via an iframe that adjusts its height dynamically based on its content. 
+                The form will automatically resize as you interact with it or when the window size changes. 
+                Try resizing the browser window to below 850px to see how the form responds to different screen sizes.
+                Additionally, select different options from the dropdown menu to observe how the form content changes and the iframe resizes accordingly.
+            </p>
+                   </div>
+        <div class="col-sm-12 col-md-6">
+            <form>
+                <div class="form-group">
+                    <label for="payment-method">Payment Method:</label>
+                    <select id="payment-method" class="form-control" onchange="handleSelectionChange()">
+                        <option value="">Select</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Bank">Bank</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div id="credit-card-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="cc-number">Credit Card Number:</label>
+                        <input type="text" class="form-control" id="cc-number" placeholder="Enter credit card number">
+                    </div>
+                    <div class="form-group">
+                        <label for="cc-expiry">Expiry Date:</label>
+                        <input type="text" class="form-control" id="cc-expiry" placeholder="MM/YY">
+                    </div>
+                    <div class="form-group">
+                        <label for="cc-cvc">CVC:</label>
+                        <input type="text" class="form-control" id="cc-cvc" placeholder="CVC">
+                    </div>
+                </div>
+
+                <div id="bank-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="bank-account">Bank Account Number:</label>
+                        <input type="text" class="form-control" id="bank-account" placeholder="Enter bank account number">
+                    </div>
+                </div>
+
+                <div id="other-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="other-details">Lots of Details:</label>
+                        <input type="text" class="form-control" id="other-details" placeholder="Enter details">
+                    </div>
+                    <div class="form-group">
+                        <label for="other-details">Lots of Details:</label>
+                        <input type="text" class="form-control" id="other-details" placeholder="Enter details">
+                    </div>
+                    <div class="form-group">
+                        <label for="other-details">Lots of Details:</label>
+                        <input type="text" class="form-control" id="other-details" placeholder="Enter details">
+                    </div>
+                    <div class="form-group">
+                        <label for="other-details">Lots of Details:</label>
+                        <input type="text" class="form-control" id="other-details" placeholder="Enter details">
+                    </div>
+                    <div class="form-group">
+                        <label for="other-details">Lots of Details:</label>
+                        <input type="text" class="form-control" id="other-details" placeholder="Enter details">
+                    </div>
+                    <div class="form-group">
+                        <label for="other-details">Lots of Details:</label>
+                        <input type="text" class="form-control" id="other-details" placeholder="Enter details">
+                    </div>
+                    <div class="form-group">
+                        <label for="other-details">Lots of Details:</label>
+                        <input type="text" class="form-control" id="other-details" placeholder="Enter details">
+                    </div>
+                    <div class="form-group">
+                        <label for="other-details">Lots of Details:</label>
+                        <input type="text" class="form-control" id="other-details" placeholder="Enter details">
+                    </div>
+                    <div class="form-group">
+                        <label for="other-details">Lots of Details:</label>
+                        <input type="text" class="form-control" id="other-details" placeholder="Enter details">
+                    </div>
+                    <div class="form-group">
+                        <label for="other-details">Lots of Details:</label>
+                        <input type="text" class="form-control" id="other-details" placeholder="Enter details">
+                    </div>
+                    <div class="form-group">
+                        <label for="other-details">Lots of Details:</label>
+                        <input type="text" class="form-control" id="other-details" placeholder="Enter details">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+   
+    <script>
+        // START OF IFRAME RESIZING LOGIC
+        /**
+         * Function to send the height of the iframe content to the parent page.
+         * This function calculates the height of the body content and sends it
+         * to the parent window using postMessage whenever the form page is modified 
+         * by js/form options or when the page reflows due to mobile page resizing.
+         */
+        function sendHeightToParent() {
+            // Get the current scroll height of the document body.
+            var height = document.body.scrollHeight;
+
+            // Use window.parent.postMessage to send the height to the parent page.
+            // The "*" target allows messages to be received by any parent domain.
+            window.parent.postMessage({ height: height }, "*");
+        }
+
+        
+        // Resize Logic:
+        // Call the sendHeightToParent function initially when the iframe content loads.
+        window.onload = sendHeightToParent;
+
+        // Listen for window resize events to adjust the height when the window size changes.
+        window.addEventListener('resize', sendHeightToParent);
+
+        /**
+         * Use a MutationObserver to watch for changes in the form or other DOM elements.
+         * This ensures that any content changes (e.g., AJAX updates) are detected.
+         * The observer triggers sendHeightToParent() whenever the DOM changes.
+         */
+        const observer = new MutationObserver(() => sendHeightToParent());
+        observer.observe(document.body, {
+            attributes: true, // Watch for changes to attributes of elements.
+            childList: true,  // Watch for changes to child elements.
+            subtree: true     // Watch for changes within all descendant elements.
+        });
+
+        /**
+         * Optional: Use setInterval as a backup mechanism to ensure iframe height is updated.
+         * This can capture any missed changes not detected by the MutationObserver.
+         */
+        setInterval(sendHeightToParent, 500);
+
+
+  // END OF IFRAME RESIZING LOGIC
+
+
+
+    // This code below is specific to the form demo and handles the dropdown selection changes. It is not related to the iframe resizing logic.
+        
+        /**
+         * Function to handle dropdown selection changes and show corresponding fields.
+         * When the dropdown changes, it updates the visible form fields and resizes the iframe.
+         */
+         function handleSelectionChange() {
+            const selection = document.getElementById('payment-method').value;
+            const creditCardFields = document.getElementById('credit-card-fields');
+            const bankFields = document.getElementById('bank-fields');
+            const otherFields = document.getElementById('other-fields');
+
+            // Hide all fields initially.
+            creditCardFields.style.display = 'none';
+            bankFields.style.display = 'none';
+            otherFields.style.display = 'none';
+
+            // Show the appropriate fields based on the selection.
+            if (selection === 'Credit Card') {
+                creditCardFields.style.display = 'block';
+            } else if (selection === 'Bank') {
+                bankFields.style.display = 'block';
+            } else if (selection === 'Other') {
+                otherFields.style.display = 'block';
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>
