@@ -5,7 +5,8 @@ This project demonstrates how to embed a form inside an iframe and automatically
 
 ##Demo
 Let's get right to it:
-[https://dervishmoose.github.io/Iframe-Dynamic-Resizing-Demo/](See the Iframe Dynamic Resizing Demo)
+[https://dervishmoose.github.io/Iframe-Dynamic-Resizing-Demo](See the Iframe Dynamic Resizing Demo)
+
 
 ## Project Overview
 
