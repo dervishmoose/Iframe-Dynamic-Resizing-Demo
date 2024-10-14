@@ -3,6 +3,10 @@
 
 This project demonstrates how to embed a form inside an iframe and automatically adjust the iframe's height based on its content and interactions. This solution ensures that the iframe is responsive and adapts to content changes (such as user input or AJAX updates) and window resizing, preventing scrollbars and maintaining a clean user experience.
 
+##Demo
+Let's get right to it:
+[https://dervishmoose.github.io/Iframe-Dynamic-Resizing-Demo/](See the Iframe Dynamic Resizing Demo)
+
 ## Project Overview
 
 ### What is it?
