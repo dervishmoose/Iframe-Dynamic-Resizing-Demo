@@ -105,4 +105,4 @@ If you would like to contribute to this project, please fork the repository and 
 
 ## Contact
 
-For any questions or issues, please contact the project maintainer at `[dervishmooseconsulting.com/contact](https://dervishmooseconsulting.com/contact/)` or open an issue on the GitHub repository.
+For any questions or issues, please contact the project maintainer at [dervishmooseconsulting.com/contact](https://dervishmooseconsulting.com/contact/) or open an issue on the GitHub repository.
